@@ -953,10 +953,12 @@ img, svg { display: block; max-width: 100%; }
     border-bottom: 2px solid transparent;
     padding: 8px 12px;
     flex-shrink: 0;
+    width: auto;
   }
   .doc-tabs .tab.on {
     border-left-color: transparent;
     border-bottom-color: var(--accent);
+    background: transparent;
   }
   .doc-content { border-right: none; }
   .doc-aside { min-height: 200px; }
