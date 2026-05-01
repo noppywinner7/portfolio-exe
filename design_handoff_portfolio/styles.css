@@ -824,6 +824,7 @@ img, svg { display: block; max-width: 100%; }
     height: auto;
     min-height: 100vh;
     grid-template-rows: 44px 1fr 36px;
+    overflow: auto;
   }
 
   .body-grid {
@@ -922,10 +923,12 @@ img, svg { display: block; max-width: 100%; }
   }
 
   /* -- HERO -- */
-  .hero { min-height: 280px; height: 280px; }
+  .hero { min-height: auto; height: auto; }
   .hero-title { font-size: 22px !important; }
   .hero-title-block { max-width: 100%; }
-  .hero-spec-card { max-width: 100%; }
+  .hero-bg { position: relative; aspect-ratio: 16 / 9; }
+  .hero-overlay { position: relative; padding: 12px; }
+  .hero-spec-card { max-width: 100%; margin-top: 12px; }
   .hero-quote { font-size: 11px; }
 
   /* -- THUMBNAILS -- */
@@ -964,6 +967,8 @@ img, svg { display: block; max-width: 100%; }
   .doc-aside { min-height: 200px; }
   .doc-section { position: static; }
   .detail-wrap > .panel.detail-main > .panel-h { position: static; }
+  .detail-wrap { overflow: visible; }
+  .detail-wrap > .panel.detail-main { overflow: visible; }
 
   /* -- PROCESS -- */
   .process-grid { grid-template-columns: repeat(2, 1fr); }
