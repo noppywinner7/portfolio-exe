@@ -87,7 +87,7 @@ const Glitch = ({ children, text, every = 6500 }) => {
 
 const Cursor = () => <span className="cursor"></span>;
 
-const sfxAudio = new Audio("ui-confirm.wav");
+const sfxAudio = new Audio("ui-tick.wav");
 sfxAudio.volume = 0.4;
 
 function playSfx() {
