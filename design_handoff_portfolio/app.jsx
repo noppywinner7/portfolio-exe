@@ -19,6 +19,15 @@ function App() {
   const [filter, setFilter] = useStateA("ALL");
   const [selectedId, setSelectedId] = useStateA(1);
   const [booting, setBooting] = useStateA(tweaks.boot);
+  const [sidebarOpen, setSidebarOpen] = useStateA(false);
+  const [mobileDetail, setMobileDetail] = useStateA(false);
+  const [isMobile, setIsMobile] = useStateA(window.innerWidth <= 768);
+
+  useEffectA(() => {
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   useEffectA(() => {
     document.documentElement.dataset.theme = tweaks.theme;
@@ -89,6 +98,9 @@ function App() {
     <div className="app">
       <header className="topbar">
         <div className="t-l">
+          <button className="hamburger" onClick={() => setSidebarOpen(o => !o)} aria-label="Menu">
+            <span/><span/><span/>
+          </button>
           <span className="brand">&lt; PORTFOLIO.EXE &gt;<span className="ver">v2.0.0</span></span>
         </div>
         <div className="t-mid">{PROFILE.banner}</div>
@@ -99,8 +111,10 @@ function App() {
         </div>
       </header>
 
-      <div className="body-grid">
-        <Sidebar section={section} setSection={setSection} />
+      {sidebarOpen && <div className="sidebar-backdrop visible" onClick={() => setSidebarOpen(false)} />}
+
+      <div className={"body-grid" + (mobileDetail ? " detail-active" : "")}>
+        <Sidebar section={section} setSection={(s) => { setSection(s); setSidebarOpen(false); setMobileDetail(false); }} sidebarOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
         {section === "works" && (
           <>
@@ -109,7 +123,7 @@ function App() {
               filter={filter}
               setFilter={setFilter}
               selectedId={selectedId}
-              onSelect={setSelectedId}
+              onSelect={(id) => { setSelectedId(id); if (isMobile) setMobileDetail(true); }}
             />
             <ProjectDetail
               project={project}
@@ -117,6 +131,7 @@ function App() {
               total={filtered.length}
               onPrev={goPrev}
               onNext={goNext}
+              onBack={() => setMobileDetail(false)}
             />
           </>
         )}

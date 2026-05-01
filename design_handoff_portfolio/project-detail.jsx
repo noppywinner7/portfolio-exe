@@ -2,7 +2,7 @@
 
 const { useState: useStateD, useEffect: useEffectD } = React;
 
-const ProjectDetail = ({ project, index, total, onPrev, onNext }) => {
+const ProjectDetail = ({ project, index, total, onPrev, onNext, onBack }) => {
   const [docTab, setDocTab] = useStateD("01");
   const [activeThumb, setActiveThumb] = useStateD(0);
   const [procOpen, setProcOpen] = useStateD(true);
@@ -16,7 +16,10 @@ const ProjectDetail = ({ project, index, total, onPrev, onNext }) => {
       <section className="panel detail-main screen-fade" key={project.id}>
         <span className="corner-tl"/><span className="corner-tr"/><span className="corner-bl"/><span className="corner-br"/>
         <div className="panel-h">
-          <div className="h-l">&gt; WORK DETAILS</div>
+          <div className="h-l">
+            <button className="mobile-back" onClick={onBack} aria-label="Back to list">&lt; BACK</button>
+            <span>&gt; WORK DETAILS</span>
+          </div>
           <div className="h-r">
             ENTRY {String(index+1).padStart(2,"0")} / {String(total).padStart(2,"0")}
             &nbsp;

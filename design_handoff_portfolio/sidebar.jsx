@@ -1,9 +1,9 @@
 // Sidebar / nav, profile card, footer
 const { useState: useStateS } = React;
 
-const Sidebar = ({ section, setSection, theme }) => {
+const Sidebar = ({ section, setSection, sidebarOpen, onClose }) => {
   return (
-    <aside className="panel sidebar">
+    <aside className={"panel sidebar" + (sidebarOpen ? " open" : "")}>
       <span className="corner-tl"/><span className="corner-tr"/><span className="corner-bl"/><span className="corner-br"/>
       <div className="panel-h">
         <div className="h-l">&gt; PROFILE</div>

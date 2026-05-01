@@ -16,7 +16,7 @@ const SectionFrame = ({ title, total, current, children }) => (
 
 const OverviewSection = ({ goWorks }) => (
   <SectionFrame title="01. OVERVIEW" total="01" current="01">
-    <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 32 }}>
+    <div className="overview-grid">
       <div>
         <div style={{ color: "var(--accent)", fontSize: 10, marginBottom: 8 }}>// SYSTEM GREETING</div>
         <h2 className="h2">
@@ -38,7 +38,7 @@ const OverviewSection = ({ goWorks }) => (
       </div>
       <div style={{ border: "1px solid var(--line)", padding: 20, background: "var(--bg-raised)", position: "relative" }}>
         <div style={{ color: "var(--accent-dim)", fontSize: 10, marginBottom: 14 }}>// SYSTEM STATS</div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18 }}>
+        <div className="stats-grid">
           <Stat label="PROJECTS" value="12" />
           <Stat label="HOURS LOGGED" value="1,840" />
           <Stat label="ACTIVE SINCE" value="2022" />
@@ -72,7 +72,7 @@ const ActivityRow = ({ date, text }) => (
 
 const AboutSection = () => (
   <SectionFrame title="03. ABOUT">
-    <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: 36 }}>
+    <div className="about-grid">
       <div>
         <div style={{ color: "var(--accent)", fontSize: 10, marginBottom: 8 }}>// FILE: about.txt</div>
         <h2 className="h2">A QUIET LITTLE STUDIO.</h2>

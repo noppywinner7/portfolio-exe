@@ -6,7 +6,7 @@ const WorksList = ({ projects, filter, setFilter, selectedId, onSelect }) => {
     : projects.filter(p => p.tags.includes(filter));
 
   return (
-    <section className="panel">
+    <section className="panel works-list-panel">
       <span className="corner-tl"/><span className="corner-tr"/><span className="corner-bl"/><span className="corner-br"/>
       <div className="panel-h">
         <div className="h-l">&gt; WORKS DATABASE</div>
