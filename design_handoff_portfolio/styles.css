@@ -962,6 +962,8 @@ img, svg { display: block; max-width: 100%; }
   }
   .doc-content { border-right: none; }
   .doc-aside { min-height: 200px; }
+  .doc-section { position: static; }
+  .detail-wrap > .panel.detail-main > .panel-h { position: static; }
 
   /* -- PROCESS -- */
   .process-grid { grid-template-columns: repeat(2, 1fr); }
