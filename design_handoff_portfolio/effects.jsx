@@ -89,8 +89,10 @@ const Cursor = () => <span className="cursor"></span>;
 
 const sfxAudio = new Audio("ui-tick.wav");
 sfxAudio.volume = 0.4;
+window.__soundEnabled = false;
 
 function playSfx() {
+  if (!window.__soundEnabled) return;
   sfxAudio.currentTime = 0;
   sfxAudio.play().catch(() => {});
 }

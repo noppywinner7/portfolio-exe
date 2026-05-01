@@ -10,7 +10,8 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "grain": 0.08,
   "vignette": false,
   "boot": true,
-  "cursorSpeed": 1.1
+  "cursorSpeed": 1.1,
+  "sound": false
 }/*EDITMODE-END*/;
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  useEffectA(() => { window.__soundEnabled = tweaks.sound; }, [tweaks.sound]);
 
   useEffectA(() => {
     document.documentElement.dataset.theme = tweaks.theme;

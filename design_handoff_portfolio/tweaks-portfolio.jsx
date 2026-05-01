@@ -70,6 +70,11 @@ const PortfolioTweaks = ({ tweaks, setTweak }) => (
         min={0.3} max={2.5} step={0.1}
         onChange={(v) => setTweak("cursorSpeed", v)}
       />
+      <TweakToggle
+        label="UI SOUND"
+        value={tweaks.sound}
+        onChange={(v) => { setTweak("sound", v); window.__soundEnabled = v; }}
+      />
     </TweakSection>
   </TweaksPanel>
 );
