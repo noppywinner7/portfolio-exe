@@ -1,0 +1,57 @@
+LLM Wiki — A Structured Knowledge Base That Replaces RAG
+What it is
+An LLM-powered knowledge management system built on plain markdown and structured cross-references instead of vector databases and embedding pipelines. Inspired by Andrej Karpathy's LLM Wiki pattern, this project takes the idea significantly further — from a personal notes tool into a production-grade knowledge architecture with a formal schema, multi-tradition content support, and a serving layer designed for downstream AI applications.
+
+Architecture
+Three layers, zero infrastructure beyond a git repo:
+
+raw/ — immutable source documents. Articles, transcripts, academic papers. The system reads from this layer but never modifies it.
+wiki/ — LLM-generated pages. Entity profiles, concept breakdowns, cross-tradition analyses, source summaries. The LLM owns this layer entirely — creates pages, maintains cross-references via [[wikilinks]], and keeps everything consistent across ingests.
+CLAUDE.md — the schema. Defines folder conventions, frontmatter structure, ingest/query/lint workflows, and domain-specific rules. This is the contract between the human curator and the LLM agent.
+The system supports three core operations:
+
+Operation	What happens
+Ingest	Drop a source into raw/ → LLM decomposes it into multiple wiki pages, links them into the graph, updates the index and changelog
+Query	Ask a question → LLM navigates by index + wikilinks (not similarity search), synthesizes an answer with citations
+Lint	Periodic health check — finds contradictions between pages, stale claims, orphan pages, missing cross-references, doctrinal errors
+Why it's better than RAG (for the right use case)
+Dimension	LLM Wiki	Semantic-search RAG
+Retrieval	Structural — index + explicit links	Statistical — embedding similarity
+Infrastructure	A folder of markdown files	Embedding model + vector DB + chunker + reindexing pipeline
+Relationships	Explicit, human/LLM-authored, auditable	Implicit via embedding proximity, opaque
+Editability	Edit markdown → next request sees it	Edit source → re-embed → reindex
+Cost	Tokens only	Tokens + ongoing compute + storage
+Sweet spot	Dozens to hundreds of curated pages	Thousands to millions of docs
+The key insight: the LLM navigates structured knowledge the way a human reads Wikipedia — land on the index, pick the relevant page, follow cross-links for depth. That's more relationship-aware than cosine similarity, and far easier to audit and correct.
+
+What was actually built
+Over 6 sessions, the system grew organically to 120+ wiki pages across two complete knowledge traditions (Thai and Chinese systems), including:
+
+31 raw sources ingested — articles, academic papers, YouTube transcripts, classical text commentaries, in Thai, Chinese, and English
+10 per-user preload targets with YAML frontmatter designed for programmatic access by a downstream application
+An operational instructions manual (~480 lines) synthesized from 15+ sources — a "game knowledge" file that turns a generic LLM into a domain expert capable of conducting professional-grade readings
+Cross-tradition concept pages that correctly model relationships between similar-but-distinct ideas across knowledge systems
+A lint system that caught and fixed critical doctrinal errors (e.g., an inverted polarity convention in a foundational reference table that every downstream interpretation depends on)
+Serving architecture (tested against a real chatbot)
+We designed and analyzed a preload + Anthropic prompt caching serving layer, tested against a Vercel-deployed chatbot consuming the wiki. The architecture:
+
+On user onboarding, compute the user's profile → select the relevant wiki page slugs
+Each chat turn, read those pages into a cached system prompt — same prefix every turn means high cache-hit rate
+For off-profile questions, a readWikiPage(slug) tool fires as fallback
+Result: ~5x cheaper per turn than traditional RAG after cache warmup, with better accuracy on curated domain content. RAG's retrieved chunks change per query (breaking the cache prefix), while preloaded profile pages stay stable across a session.
+
+This only works because the wiki's content is curated and structured — the preload selection is deterministic, not probabilistic. The architecture exploits the query shape (most questions target a known user profile) rather than fighting it with generic similarity search.
+
+The real value
+This isn't a note-taking app. It's a demonstration of a pattern:
+
+Knowledge accumulates structurally. Every ingest enriches existing pages, adds cross-references, and surfaces gaps. The wiki gets smarter with each source — explorations compound.
+The LLM is the curator, not just the consumer. It doesn't just answer questions from docs — it builds and maintains the knowledge graph that future questions draw from.
+Plain text scales further than you'd think. No vendor lock-in, no infra costs, full git history, grep-able, human-readable, and cheap to serve via prompt caching.
+Lint catches what tests can't. The LLM audits its own knowledge for internal consistency — contradictions, stale claims, orphaned pages, doctrinal errors that would silently produce wrong answers downstream.
+Tech stack
+Claude Code (Anthropic's agentic CLI) as the LLM agent
+Obsidian as the optional visual frontend (Web Clipper for source acquisition)
+Git for versioning and downstream integration (submodule pattern)
+Anthropic prompt caching for cost-efficient serving
+Markdown + YAML frontmatter — that's it. No database, no embeddings, no build step.

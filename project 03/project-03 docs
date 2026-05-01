@@ -1,0 +1,50 @@
+Content Engine — What It Delivers
+A production pipeline that turns a creative brief into a finished, beat-synced short-form video. No editing software. No timeline dragging. You describe what you want, and the system builds it.
+
+What it does:
+
+It takes raw inputs — images, audio, a script — and assembles them into publish-ready vertical video with animated subtitles, text overlays, transitions, and multi-layer audio mixing. Every cut lands on the beat. The audio is analyzed frame-by-frame through FFmpeg to detect onsets, and the visual cuts are placed exactly where the rhythm hits.
+
+What makes it different:
+
+There is no UI. The entire system is operated through natural language via Claude Code. The user is the creative director — they make taste decisions, pick the vibe, choose the music. The engine handles every technical step between "I want this" and a finished MP4.
+
+Beat synchronization runs on pure FFmpeg signal analysis. No paid plugins, no DAW, no CapCut subscription. A 30-second beat-synced edit renders in under a minute from a single command.
+
+What it replaces:
+
+The manual workflow of importing clips into an editor, dragging them to a timeline, eyeballing the beat, nudging cuts frame by frame, exporting, re-exporting. That process takes 20–45 minutes per video for someone who knows what they're doing. This does it in one run.
+
+Core value:
+
+One person can produce short-form content at the speed and volume of a team, without learning editing software, and without sacrificing quality. The bottleneck shifts from production to creative direction — which is where it should be.
+
+Built and working today:
+
+FFmpeg video assembler with transitions, text overlays, and 3-layer audio mixing
+Beat detection via RMS onset analysis — no external libraries
+ASS subtitle generator with 7 animation types (fade, pop, typewriter, shake, scale bounce, glow, slide up)
+Full CLI for content lifecycle management (create, assemble, review, approve)
+YAML-driven brand profiles and content templates
+Pluggable architecture for AI image generation, motion, TTS, and social posting
+What it scales into:
+
+The adapter layer is built but not yet connected. When image generation (Replicate, Fal), motion (Runway, Kling), voice (ElevenLabs), and social APIs (TikTok, Instagram, YouTube) are wired in, the pipeline goes from "give me assets and I'll edit" to "give me a concept and I'll produce and publish." One prompt to finished post.
+Project Documentation
+01. Concept:
+A marketing content engine that separates creative direction from production execution. The human writes the script, sets the brand voice, and makes taste calls. The engine handles everything after that — assembling footage, syncing cuts to the beat, rendering subtitles, mixing audio layers. The core idea is that editing should not be a bottleneck. You describe a vibe, the system builds the video.
+
+02. Process:
+Built iteratively through Claude Code. Started with the data model — a ContentPiece that holds every detail of a video from script to scenes to audio mix. Then the FFmpeg assembler that takes that object and renders a real MP4. Then the subtitle system with animated text. Then beat detection so cuts land on the music automatically. Each layer was tested with real media before moving to the next. The user operates through conversation, not a code editor.
+
+03. Technical Breakdown:
+The assembler takes images or clips, scales them to vertical format, concatenates with transitions, burns in text overlays via FFmpeg drawtext, and mixes up to three audio layers — background music, voiceover, and sound effects — with automatic ducking. Beat detection works by extracting per-frame RMS volume levels from the audio using FFmpeg's astats filter, then finding onset points where the signal rises sharply after a dip. Each onset becomes a cut point. The subtitle engine generates ASS files with animation override tags — fade, pop, typewriter, shake, glow — which FFmpeg burns directly into the video. Everything runs through a CLI built on Click and Rich, backed by a SQLite database and YAML configuration for brands, platforms, and templates.
+
+04. Challenges:
+Beat detection on consistently loud tracks. Threshold-based detection works on tracks with clear quiet-loud dynamics, but falls apart on dense mixes where the RMS stays high throughout. Solved by switching to onset detection — measuring the rate of volume rise rather than the absolute level. Windows path handling in FFmpeg filter chains was another recurring issue — colons in file paths, backslash escaping, and Unicode characters in print output all needed specific workarounds. GIF inputs required different FFmpeg flags than static images, which only surfaced during real assembly runs.
+
+05. Outcome:
+A working pipeline that takes a folder of images and an audio file and outputs a beat-synced, subtitled, vertical video in under a minute. No editing software involved. The 30-second portfolio demo — 28 cuts across different sections of a website recording, every transition landing on the rhythm of the NEXT! track — was generated from a single script run. The system handles the tedious frame-level work so the creator stays in the director's chair.
+
+06. Future Iterations:
+Wire in the AI generation layer — image generation through Replicate or Fal, motion through Runway or Kling, voice through ElevenLabs. The adapter interfaces are built, just not connected. Once live, the pipeline goes from "give me assets and I will edit" to "give me a concept and I will produce." After that, social platform posting adapters for TikTok, Instagram, YouTube, and Twitter to close the loop from idea to published post. Template system so recurring formats can be triggered with one command instead of a custom script each time.

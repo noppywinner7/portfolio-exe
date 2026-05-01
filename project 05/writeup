@@ -1,0 +1,62 @@
+BAZI LOADOUT
+What it delivers
+A JRPG-styled web application that takes your birth data — date, time, location, gender — and renders a full Four Pillars of Destiny (八字) chart as an immersive, cinematic character-loadout screen. Ancient Chinese metaphysics, presented as a dark fantasy RPG interface.
+
+You don't get a table of stems and branches. You get a loadout. Your four pillars are selectable cards with element-colored glows and tooltip breakdowns. Your five elements are stat columns with animated fill bars and action recommendations. Your luck cycles are a timeline of decade-long phases with omen ratings. Your chart strength is a chrysanthemum-adorned gauge with shimmer effects. Everything is bilingual — Japanese and Chinese labels toggle in real-time — and everything responds to hover, click, and selection with particle bursts and synthesized audio feedback.
+
+The core value is this: Bazi is a 3,000-year-old system that most apps present as spreadsheets or static PDFs. This turns it into something you actually want to look at, interact with, and share — without dumbing down the underlying metaphysics.
+
+Core properties
+Zero build tooling. No Webpack, no Vite, no npm, no node_modules. React 18 and Babel compile JSX directly in the browser. The entire app runs off a static file server. Drop the folder anywhere and it works.
+
+Cinematic onboarding. Five-step animated sequence: title reveal with spinning trigram rings → birth data entry styled as JRPG character creation → dramatic analysis with flickering kanji and a progress circle → element-by-element pentagon reveal with particle bursts → full profile summary with a pulsing "Enter Your Loadout" transition. Every step crossfades. Every interaction has audio feedback.
+
+Themeable at every level. Four full color palettes — Crimson, Indigo, Gold, Ice — controlled by CSS custom properties. Every panel, glow, border, gradient, and particle color responds instantly. CJK language toggles between Japanese, Chinese, and off. Card density, ambient effects, HUD chrome, and sound FX are all adjustable through a draggable tweaks panel.
+
+Designed to the pixel. 1920×1080 fixed canvas with viewport-fit scaling. Custom JRPG cursor with crosshair. L-shaped SVG corner brackets on every panel. Ember particles drifting upward. A scan line sweeping across the character portrait. Spinning I-Ching trigram and zodiac rings behind the character at different rotation speeds. Shimmer sweeps on every stat bar. Nothing is browser-default. Nothing is inherited from a component library.
+
+Audio-reactive UI. WebAudio API synthesizes blips on hover (880Hz triangle wave, 40ms) and two-tone chirps on selection (660Hz square → 1100Hz triangle). No audio files loaded. Sound is generated in real-time, mutable from the tweaks panel.
+
+Modular architecture. Clean separation: data.jsx (mock chart data + element colors), atoms.jsx (BiLabel, Panel, CornerNotches, StatBar, Selectable, Tooltip system), panels.jsx (Bazi Chart, Luck Cycle, Elemental Play, Lucky Items), center.jsx (character portrait + spinning rings + nameplate), chrome.jsx (top bar, nav, ambience, cursor, SFX engine), tweaks.jsx (settings bindings), onboarding.jsx (5-step flow). Every component is authored from scratch.
+
+What makes it different
+It treats astrology as interaction design, not data display. Most Bazi apps are forms that return text. This is a full-screen immersive environment where every piece of chart data is a touchable, hoverable, glowing object with tooltips, particle effects, and sound. The difference isn't cosmetic — it changes how people engage with their chart.
+
+It's bilingual by architecture, not by afterthought. The BiLabel component renders parallel Japanese and Chinese spans everywhere. A data-cjk attribute on the body toggles visibility via CSS. Every label, every title, every omen, every action word exists in both languages plus English. The CJK isn't decorative — it's the primary text layer.
+
+It's a design system, not a page. The atomic components — Panel, Selectable, CornerNotches, StatBar, ElementGlyph, BiLabel, SectionHeader — compose into any layout. The loadout screen and the onboarding flow share the same atoms. A new page (daily forecast, compatibility chart, annual reading) could be built from the same kit in hours.
+
+It ships with a tweaks panel. Ctrl+Shift+. opens a floating, draggable settings panel that controls theme, language, ambient effects, HUD visibility, card density, and sound — in real-time, without reload. This isn't a dev tool. It's part of the product experience.
+
+Use cases
+Personal astrology app. A user enters their birth data once, gets a full Bazi profile, and returns to check luck cycles, elemental balance, and recommendations. The JRPG framing makes it sticky — people screenshot their loadout screens the way they screenshot game stats.
+
+Astrology practitioner tool. A Bazi consultant generates charts for clients and walks them through the interface during a reading. The bilingual labels, tooltips, and visual hierarchy make it a presentation layer for consultations — far more engaging than a printed chart.
+
+Portfolio showpiece. This project demonstrates UI engineering, interaction design, animation choreography, design system thinking, audio synthesis, and cultural typography in a single artifact. It's not a tutorial project. It's a production-quality interface that happens to not be deployed yet.
+
+Cultural education. The interface teaches Bazi concepts through interaction — hovering over a pillar explains heavenly stems and earthly branches, element cards show roles and recommended actions, luck cycles explain life phases. The learning is embedded in the UI, not in a separate docs page.
+
+White-label astrology product. The theming system, modular architecture, and clean data layer mean this could be reskinned for a different brand, wired to a real Bazi calculation engine, and deployed as a consumer product with minimal refactoring.
+
+Future potential
+Functional Bazi engine. The calculation math is well-documented and deterministic — year/day/hour pillars are modular arithmetic on the sexagenary cycle, month pillars require a solar term table. A bazi-engine.jsx module (~300-400 lines) would replace mock data with real computed charts from any birth input.
+
+Mobile responsive. The current 1920×1080 canvas scales down but isn't thumb-friendly. A responsive pass would stack panels vertically for portrait screens and enlarge touch targets. The design system already supports density modes — compact vs. comfy — so the foundation is there.
+
+Daily/monthly forecasts. The luck cycle panel already shows decade phases. Extending it to daily stem-branch cycles, monthly forecasts, and clash/harmony alerts would make it a daily-use app, not a one-time chart generator.
+
+Compatibility charts. Two users' charts compared side by side — element harmony, pillar clashes, combined strength. Same panel components, same aesthetic, new data layer.
+
+Deployable as a static site. No server-side logic. No database. The entire app could be deployed to GitHub Pages, Vercel, or Netlify as-is. Add the Bazi engine and it's a fully functional, zero-backend astrology product.
+
+The long game: astrology as game UI. The JRPG framing isn't a gimmick — it's a thesis. Astrology data has the same structure as RPG character sheets: stats, elements, phases, equipment, strengths, weaknesses. The entire genre of astrology apps is waiting for someone to treat the presentation with the same care game studios give to their UIs. This is the proof of concept.
+
+How it was built
+Designed and developed collaboratively with Claude Code in a continuous session. Human-directed design vision — color palettes, typography choices, layout composition, interaction patterns, cultural authenticity. Every component authored from scratch through natural conversation: describe what you want, review what's generated, iterate until it's right. No templates, no boilerplate, no UI libraries. The entire codebase is ~2,000 lines of hand-written JSX and CSS.
+Design philosophy
+Every pixel is intentional. The UI pulls from NieR: Automata's HUD minimalism, Persona 5's boldness, and traditional Chinese calligraphic aesthetics. Four color themes (Crimson, Indigo, Gold, Ice) shift the entire palette through CSS custom properties. Bilingual CJK labels (Japanese/Chinese) toggle in real-time. Ember particles drift upward. A scan line sweeps across the character portrait. Custom JRPG cursor with crosshair. WebAudio synth blips on every hover and selection. Corner notch brackets on every panel. Nothing is default. Nothing is generic.
+
+How it was built
+Pure React 18 with zero build tooling — no Webpack, no Vite, no npm install. Babel standalone compiles JSX directly in the browser. The entire app is hand-authored component-by-component: atomic design tokens, a shared panel system with decorative SVG corner brackets, animated stat bars with shimmer sweeps, a tooltip system, a draggable tweaks panel (Ctrl+Shift+.), and a modular file architecture that keeps data, atoms, panels, chrome, and page logic cleanly separated. Every animation is CSS keyframes. Every glow is a box-shadow. Every gradient is hand-tuned. It runs on a Python HTTP server and a browser. That's it.
+

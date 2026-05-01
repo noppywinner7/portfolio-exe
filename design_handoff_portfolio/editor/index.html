@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>PORTFOLIO.EXE — Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"/>
+<link rel="stylesheet" href="editor.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <header class="ed-topbar">
+    <span class="ed-brand">&lt; PORTFOLIO.EXE &gt; <span class="ed-ver">EDITOR</span></span>
+    <div class="ed-topbar-actions">
+      <button class="ed-btn ed-btn-secondary" onclick="loadFromFile()">IMPORT</button>
+      <button class="ed-btn ed-btn-secondary" onclick="saveToLocalStorage()">SAVE DRAFT</button>
+      <button class="ed-btn ed-btn-secondary" onclick="exportDataJsx()">EXPORT DATA.JSX</button>
+      <button class="ed-btn ed-btn-primary" onclick="exportZip()">EXPORT ZIP (ALL FILES)</button>
+    </div>
+  </header>
+
+  <div class="ed-layout">
+    <nav class="ed-nav">
+      <button class="ed-nav-item active" data-tab="profile" onclick="switchTab('profile')">01. PROFILE</button>
+      <button class="ed-nav-item" data-tab="projects" onclick="switchTab('projects')">02. PROJECTS</button>
+      <button class="ed-nav-item" data-tab="skills" onclick="switchTab('skills')">03. SKILLS</button>
+      <button class="ed-nav-item" data-tab="journal" onclick="switchTab('journal')">04. JOURNAL</button>
+      <button class="ed-nav-item" data-tab="docs" onclick="switchTab('docs')">05. DOCUMENTATION</button>
+      <button class="ed-nav-item" data-tab="settings" onclick="switchTab('settings')">06. SETTINGS</button>
+    </nav>
+
+    <main class="ed-main">
+
+      <!-- PROFILE -->
+      <section class="ed-tab active" id="tab-profile">
+        <div class="ed-section-header">
+          <h2>&gt; 01. PROFILE</h2>
+          <p>Your identity, bio, values, and contact info.</p>
+        </div>
+
+        <div class="ed-card">
+          <h3>// IDENTITY</h3>
+          <div class="ed-grid-2">
+            <div class="ed-field">
+              <label>HANDLE / NAME</label>
+              <input type="text" id="profile-handle" placeholder="WIN-07" />
+            </div>
+            <div class="ed-field">
+              <label>ROLE / TITLE</label>
+              <input type="text" id="profile-role" placeholder="AI ARTIST / DESIGNER" />
+            </div>
+            <div class="ed-field">
+              <label>LOCATION</label>
+              <input type="text" id="profile-location" placeholder="NOWHERE" />
+            </div>
+            <div class="ed-field">
+              <label>STATUS</label>
+              <input type="text" id="profile-status" placeholder="SEEKING BEAUTY" />
+            </div>
+            <div class="ed-field">
+              <label>JOINED DATE</label>
+              <input type="text" id="profile-joined" placeholder="2022.02.11" />
+            </div>
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <h3>// BIO</h3>
+          <div class="ed-field">
+            <label>ABOUT TEXT</label>
+            <textarea id="profile-about" rows="6" placeholder="I make things — images, interfaces, short films..."></textarea>
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <h3>// VALUES (up to 4)</h3>
+          <div id="values-list"></div>
+          <button class="ed-btn ed-btn-add" onclick="addValue()">+ ADD VALUE</button>
+        </div>
+
+        <div class="ed-card">
+          <h3>// CONTACT</h3>
+          <div class="ed-grid-2">
+            <div class="ed-field">
+              <label>EMAIL</label>
+              <input type="text" id="profile-email" placeholder="you@email.com" />
+            </div>
+            <div class="ed-field">
+              <label>INSTAGRAM</label>
+              <input type="text" id="profile-instagram" placeholder="@you" />
+            </div>
+            <div class="ed-field">
+              <label>LINKEDIN</label>
+              <input type="text" id="profile-linkedin" placeholder="/in/you" />
+            </div>
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <h3>// DISPLAY</h3>
+          <div class="ed-grid-2">
+            <div class="ed-field">
+              <label>BANNER QUOTE (shown in topbar)</label>
+              <input type="text" id="profile-banner" placeholder='"We continue to walk... to create..."' />
+            </div>
+            <div class="ed-field">
+              <label>COPYRIGHT LINE</label>
+              <input type="text" id="profile-copyright" placeholder='© 2026 WIN-07. ALL RIGHTS RESERVED.' />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="ed-tab" id="tab-projects">
+        <div class="ed-section-header">
+          <h2>&gt; 02. PROJECTS</h2>
+          <p>Your works database. Add up to 12 projects.</p>
+        </div>
+
+        <div class="ed-project-nav" id="project-tabs"></div>
+        <div id="project-editor"></div>
+        <button class="ed-btn ed-btn-add" onclick="addProject()" style="margin-top:16px">+ ADD PROJECT</button>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="ed-tab" id="tab-skills">
+        <div class="ed-section-header">
+          <h2>&gt; 03. SKILLS</h2>
+          <p>Skill groups with progress bars. Each group has a title and a list of skills with percentage levels.</p>
+        </div>
+
+        <div id="skills-list"></div>
+        <button class="ed-btn ed-btn-add" onclick="addSkillGroup()">+ ADD SKILL GROUP</button>
+      </section>
+
+      <!-- JOURNAL -->
+      <section class="ed-tab" id="tab-journal">
+        <div class="ed-section-header">
+          <h2>&gt; 04. JOURNAL</h2>
+          <p>Short essays, process notes, half-formed thoughts.</p>
+        </div>
+
+        <div id="journal-list"></div>
+        <button class="ed-btn ed-btn-add" onclick="addJournalEntry()">+ ADD ENTRY</button>
+      </section>
+
+      <!-- DOCS -->
+      <section class="ed-tab" id="tab-docs">
+        <div class="ed-section-header">
+          <h2>&gt; 05. DOCUMENTATION</h2>
+          <p>Content for the 6 documentation tabs shown in the project detail view. This is shared across all projects.</p>
+        </div>
+
+        <div class="ed-card">
+          <h3>01. CONCEPT</h3>
+          <div class="ed-field">
+            <textarea id="doc-01" rows="5" placeholder="What was the idea? Key influences?"></textarea>
+          </div>
+        </div>
+        <div class="ed-card">
+          <h3>02. PROCESS</h3>
+          <div class="ed-field">
+            <textarea id="doc-02" rows="4" placeholder="How did you make it?"></textarea>
+          </div>
+        </div>
+        <div class="ed-card">
+          <h3>03. TECHNICAL BREAKDOWN</h3>
+          <div class="ed-field">
+            <textarea id="doc-03" rows="4" placeholder="Tools, models, render settings?"></textarea>
+          </div>
+        </div>
+        <div class="ed-card">
+          <h3>04. CHALLENGES</h3>
+          <div class="ed-field">
+            <textarea id="doc-04" rows="4" placeholder="What went wrong? How did you fix it?"></textarea>
+          </div>
+        </div>
+        <div class="ed-card">
+          <h3>05. OUTCOME</h3>
+          <div class="ed-field">
+            <textarea id="doc-05" rows="4" placeholder="Reception, impact, exhibitions?"></textarea>
+          </div>
+        </div>
+        <div class="ed-card">
+          <h3>06. FUTURE ITERATIONS</h3>
+          <div class="ed-field">
+            <textarea id="doc-06" rows="4" placeholder="What would you do next?"></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="ed-tab" id="tab-settings">
+        <div class="ed-section-header">
+          <h2>&gt; 06. DEFAULT SETTINGS</h2>
+          <p>Default theme, effects, and display settings. Users can still override these with the Tweaks panel.</p>
+        </div>
+
+        <div class="ed-card">
+          <h3>// FILTER TAGS</h3>
+          <p style="color:var(--fg-muted);text-transform:none;letter-spacing:0.02em;margin-bottom:12px">These are the filter categories shown in the Works section. Edit, add, or remove them.</p>
+          <div id="tags-manager"></div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <input type="text" id="new-tag-input" placeholder="NEW TAG NAME" style="flex:1;font:inherit;letter-spacing:0.04em;text-transform:uppercase;background:var(--bg-input);border:1px solid var(--line);color:var(--fg-bright);padding:8px 10px;outline:none" />
+            <button class="ed-btn ed-btn-secondary" onclick="addFilterTag()">+ ADD TAG</button>
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <h3>// THEME</h3>
+          <div class="ed-grid-3">
+            <div class="ed-field">
+              <label>COLOR THEME</label>
+              <select id="setting-theme">
+                <option value="cream">CREAM</option>
+                <option value="ash">ASH</option>
+                <option value="rust">RUST</option>
+                <option value="mono">MONO</option>
+              </select>
+            </div>
+            <div class="ed-field">
+              <label>FONT PAIR</label>
+              <select id="setting-font">
+                <option value="jetbrains-cormorant">JETBRAINS + CORMORANT</option>
+                <option value="ibm-playfair">IBM PLEX + PLAYFAIR</option>
+                <option value="space-bodoni">SPACE MONO + BODONI</option>
+                <option value="vt323-im-fell">VT323 + IM FELL</option>
+              </select>
+            </div>
+            <div class="ed-field">
+              <label>DENSITY</label>
+              <select id="setting-density">
+                <option value="compact">COMPACT</option>
+                <option value="normal" selected>NORMAL</option>
+                <option value="spacious">SPACIOUS</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="ed-card">
+          <h3>// EFFECTS</h3>
+          <div class="ed-grid-2">
+            <div class="ed-field">
+              <label>SCANLINES (0 - 1)</label>
+              <input type="number" id="setting-scanlines" value="0.55" min="0" max="1" step="0.05" />
+            </div>
+            <div class="ed-field">
+              <label>GRAIN (0 - 0.3)</label>
+              <input type="number" id="setting-grain" value="0.08" min="0" max="0.3" step="0.01" />
+            </div>
+            <div class="ed-field">
+              <label>VIGNETTE</label>
+              <select id="setting-vignette">
+                <option value="true">ON</option>
+                <option value="false" selected>OFF</option>
+              </select>
+            </div>
+            <div class="ed-field">
+              <label>BOOT ANIMATION</label>
+              <select id="setting-boot">
+                <option value="true" selected>ON</option>
+                <option value="false">OFF</option>
+              </select>
+            </div>
+            <div class="ed-field">
+              <label>CURSOR SPEED (seconds)</label>
+              <input type="number" id="setting-cursorSpeed" value="1.1" min="0.3" max="2.5" step="0.1" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</div>
+
+<input type="file" id="file-import" accept=".jsx,.js,.json" style="display:none" onchange="handleFileImport(event)" />
+
+<script src="editor.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+What it delivers
+A system that lets you capture any source of knowledge — articles, transcripts, papers, clippings — and automatically turn it into a structured, cross-referenced knowledge base that any LLM can read and reason over.
+
+You don't organize anything yourself. You drop a source in, tell the agent to ingest it, and it reads the material, breaks it into concept pages, entity pages, and summaries, links them together with explicit cross-references, updates the index, and logs what it did. The knowledge base gets smarter with every source you add — new ingests enrich existing pages, surface contradictions, and fill gaps that previous ingests left behind.
+
+The core value is this: raw information becomes organized, queryable, auditable knowledge — without embeddings, without a vector database, without any infrastructure beyond a folder of markdown files and an LLM agent.
+
+Core properties
+Zero infrastructure. It's markdown files in a git repo. No database to maintain, no embedding pipeline to run, no reindexing when content changes.
+Accumulating intelligence. Each ingest doesn't just add — it connects. The 30th source is more valuable than the 1st because the LLM weaves it into everything that came before.
+Human-readable and auditable. Every piece of knowledge is a markdown file you can open and read. Every relationship is an explicit link you can follow. Nothing is hidden inside embedding vectors.
+LLM-native by design. The knowledge base is structured exactly how LLMs navigate information — through indexes and links, not similarity scores. Any LLM that can read markdown can use it.
+Self-healing. The lint operation lets the LLM audit its own knowledge for contradictions, stale claims, orphan pages, and missing connections. The system maintains its own integrity.
+Use cases
+Personal expertise capture. You're deep in a field — medicine, law, engineering, finance. You read dozens of papers, articles, and case studies. Instead of losing them in bookmarks or scattered notes, every source becomes structured knowledge that an LLM can draw on when you ask it questions months later.
+
+Company knowledge base. Internal docs, post-mortems, policy documents, meeting transcripts, onboarding guides. Ingest them into a wiki and any team member can query it through an LLM that gives answers grounded in your actual institutional knowledge — not hallucinations.
+
+Research synthesis. You're studying a topic across 50+ sources in multiple languages. The wiki cross-links findings, flags contradictions between sources, and builds concept pages that synthesize what you've learned. Ask it a question and it answers with citations to specific sources.
+
+Product documentation. Feed in your API docs, changelog, support tickets, and design docs. The LLM organizes them into a queryable knowledge base your support team or your users' copilot can draw from — always up to date, always consistent.
+
+Education and tutoring. A teacher or student builds a wiki from textbooks, lecture notes, and supplementary readings. The LLM can then answer questions at exactly the depth the material supports — no more, no less — with citations back to the source.
+
+Domain-specific AI applications. This is what we tested: we built the wiki for a specific domain and wired it into a chatbot as its knowledge layer. The chatbot doesn't hallucinate domain knowledge because it reads curated wiki pages, not raw training data. The serving architecture (preload + prompt caching) made it ~5x cheaper per turn than traditional RAG.
+
+Future potential
+Any LLM, any frontend. The wiki is plain markdown. It doesn't care whether it's read by Claude, GPT, Gemini, Llama, or a model that doesn't exist yet. No vendor lock-in. Swap the LLM, keep all your knowledge.
+
+Pluggable into any application. A chatbot, a Slack bot, a CLI tool, an IDE extension, a mobile app — anything that can read files can use the wiki as its knowledge source. We proved this by wiring it into a Vercel-deployed chatbot and designing a serving architecture around it.
+
+Multi-user collaborative wikis. Right now it's one person curating. But because it's git-backed, multiple people can contribute sources, the LLM ingests them, and merge conflicts are just text diffs. Standard git workflows apply.
+
+Federated knowledge. Multiple wikis for different domains, queryable together or separately. Your medical wiki, your legal wiki, your engineering wiki — each with its own schema, linkable when cross-domain questions arise.
+
+Scaling path is clear. Start with markdown and index-following. When the wiki grows past hundreds of pages, add a vector-search layer on top of the same markdown — the wiki stays the source of truth, embeddings become a derived index. The architecture doesn't need to be replaced, just extended.
+
+The long game: knowledge that compounds. Every source you ingest today makes every future query better. Unlike chat history that gets lost or RAG chunks that exist in isolation, this system builds a growing, interconnected graph of knowledge that gets more valuable over time.

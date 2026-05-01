@@ -1,0 +1,69 @@
+Here's the writeup:
+
+What it delivers
+
+A high-fidelity editorial landing page for a fictional luxury lifestyle society — Maison d'Argent — rendered as a magazine-grade web experience. Old money aesthetics, private club exclusivity, and print-editorial typography, all in the browser.
+
+You don't get a startup landing page. You get a broadsheet. A typeset masthead with an edition line and founding year. A hero block with display-weight serif headlines and flanking anchor ornaments. A three-column editorial spread with a drop-cap manifesto on the left, a parallax hero frame in the center, and a service directory on the right — each service illustrated with a hand-drawn SVG engraving. Below that: a four-up destination grid, a yacht ownership pitch with a pennant illustration, and a membership enquiry form that generates a reference number on submission. Every section fades in on scroll. Every element is built from scratch.
+
+The core value is this: luxury brand websites are almost always template-driven or agency-bloated. This demonstrates that a single developer can produce an editorial layout with the visual density and typographic care of a Departures spread or a Monocle feature — zero dependencies, zero build tools, zero component libraries.
+
+Core properties
+
+Zero build tooling. No Webpack, no Vite, no npm, no node_modules. React 18 and Babel compile JSX directly in the browser. The entire site runs off a static file server. Drop the folder on Vercel and it deploys.
+
+Typographic system with four pairings. Italiana × Cormorant Garamond (default), Playfair Display × EB Garamond, DM Serif Display × Cormorant, and Libre Caslon Display × Text. Each pairing is a single CSS class on the body — every heading, body paragraph, label, and monospace element responds. The type system isn't decorative — it's the architecture. Display, body, label, and mono are four distinct semantic layers, all switchable at once.
+
+Four complete color palettes. Bone & Ink (warm parchment, dark letterpress), Sepia & Antique (aged paper, deeper gold), Cream & Bordeaux (oxblood accent on cream), and Ink (full dark mode inversion). Every palette is a set of CSS custom properties — paper, paper-deep, paper-edge, ink, ink-soft, ink-mute, rule, accent, gold. The dark mode palette doesn't just invert foreground and background; it re-tunes every opacity, blend mode, and shadow to feel correct on a dark field.
+
+Four masthead treatments. Italic wordmark ("Le Curateur"), Caslon editorial ("The Argent Compendium"), monogram only ("M·A"), and modernist all-caps ("MAISON D ARGENT"). Each treatment changes the headline copy, the tagline, and the typographic styling. The masthead isn't a logo — it's a brand identity system with four distinct editorial voices.
+
+Hand-drawn SVG iconography. Nine service icons — yacht, wellness, tour, event, concierge, dining, estate, wine, art — each drawn as minimal line engravings inside 56×56 bordered frames. No icon library, no font glyphs. Every stroke, hull, mast, fork, wine glass, and globe is authored inline as SVG path data, styled with the current ink color.
+
+Paper grain without images. A CSS-only texture overlay using three layered radial gradients at different densities (3px, 5px, 7px), blended via mix-blend-mode: multiply. In dark mode, it switches to screen blending and reduces opacity. The effect is subtle and resolution-independent — no raster noise, no repeating tile.
+
+Scroll-driven reveal animations. Every major section is wrapped in a .reveal class. An IntersectionObserver triggers at 12% visibility, adding a class that transitions opacity and a 14px vertical shift over 0.9 seconds. Sections materialize as you scroll, one by one, without JavaScript animation libraries.
+
+Parallax on the editorial hero. The center column's hero frame tracks scroll position and applies a gentle vertical offset (±40px range) via a CSS custom property. The effect is scroll-driven but throttled by passive event listeners — no requestAnimationFrame loops, no layout thrash.
+
+Full membership form with confirmation flow. Name, email, phone, city, country, net worth tier, referral source, contact preference (email/phone/concierge), nine interest checkboxes, and a freeform notes field. On submit, the form replaces itself with a centered thank-you panel displaying a generated reference code (MA-XXXX-NNNN). Every input is styled from scratch — underline text fields, custom select arrows, custom radio dots, custom checkboxes with serif checkmarks. Two layout modes: three-column split and single-column stacked.
+
+Ornamental detailing. Double rules below the masthead. Ornament rules with centered glyphs (✦) between sections. A crest block with a monogram inside concentric circles (solid, soft, dashed). A pennant SVG with a compass rose on a flagpole. Anchor icons flanking the hero tagline. Every ornament uses the current palette's ink and gold colors.
+
+Responsive down to mobile. Three breakpoints: full editorial at desktop, two-column reflow at 960px, single-column stack at 600px. The masthead, destination grid, form layout, service grid, and editorial columns all restructure. The type scale uses clamp() throughout — display headlines range from 48px to 112px, section heads from 22px to 28px.
+
+Ships with a tweaks panel. A floating, draggable settings panel — frosted glass with backdrop blur, viewport-clamped positioning, custom scrollbar — lets you switch palette, typography, masthead style, hero photo, and form layout in real time. Every change is instant, no reload. The panel is a reusable component system (TweakSlider, TweakToggle, TweakRadio, TweakSelect, TweakColor, TweakNumber, TweakButton) that can be dropped into any prototype.
+
+What makes it different
+
+It treats brand identity as a design variable, not a fixed asset. Most landing pages ship one look. This ships four mastheads, four type pairings, four palettes, and three hero treatments — all composable. A creative director could sit with a client, open the tweaks panel, and try sixty combinations in a meeting. The site isn't a page; it's a brand exploration tool.
+
+It has the density of print. Three-column editorial layouts, drop caps, double rules, ornamental dividers, engraved icons, crest blocks, pennant illustrations — the visual language is drawn from magazine and broadsheet design, not SaaS templates. Nothing looks like a website. Everything looks like it was typeset.
+
+The form is part of the experience. Most luxury brand forms are afterthoughts — a Typeform embed or a mailto link. This one is styled with the same typographic system as the editorial content. Underline inputs, serif checkmarks, uppercase labels at 10px with 0.28em letter-spacing. The confirmation panel matches the editorial tone. The reference number feels like a receipt from a private club, not a form ID.
+
+Use cases
+
+Luxury brand prototype. A founder or creative director building a members-only club, private travel service, or wealth-adjacent lifestyle brand can use this as a functional prototype — swap the copy, drop in photos, and present to investors or partners. The tweaks panel makes it a presentation tool, not just a mockup.
+
+Editorial design system. The atomic elements — display type scale, body text with drop cap, ornamental rules, SVG icons, crest block, parallax frame, reveal animations, form controls — compose into any editorial layout. A magazine site, a hotel booking page, a wine club, or a real estate brochure could be built from the same parts.
+
+Portfolio showpiece. This project demonstrates editorial typography, CSS architecture (custom properties, palette theming, responsive grids), component design, SVG illustration, scroll-driven animation, and form UX — in a single artifact. It's not a tutorial exercise. It's a production-fidelity editorial interface built without a single dependency.
+
+Design exploration tool. The four-palette × four-type × four-masthead matrix produces dozens of distinct brand identities from the same content. A designer could use this to demonstrate how typographic and chromatic choices shape brand perception — same words, same layout, completely different mood.
+
+Future potential
+
+Real photography. The current build uses labeled placeholder frames with hatched backgrounds and file-spec callouts — ready for art direction. Dropping in actual images (yacht photography, destination aerials, villa interiors) would bring the layout to full production fidelity without touching the code.
+
+CMS integration. The content layer — experiences, destinations, brand copy, form fields — is cleanly separated as JavaScript objects at the top of app.jsx. Wiring it to a headless CMS (Sanity, Contentful, Notion API) would make the copy editable without developer involvement.
+
+Booking and payments. The membership form currently generates a client-side reference number. Adding a backend (Stripe for deposits, a serverless function for email confirmation) would turn this into a working intake funnel. The form already captures net worth tier, referral source, and interest categories — the data model is ready.
+
+Animation polish. The scroll reveals are intentionally restrained. Adding staggered entrance timing for the service list, a slow ken-burns drift on the hero photo, and subtle parallax on the destination cards would push it from editorial to cinematic — without changing the information architecture.
+
+Multi-page expansion. The current single-page layout could extend into a full site: a destinations detail page, a journal/editorial blog, a member portal, an events calendar. The type system, palette theming, and component library already support it — the foundation scales.
+
+How it was built
+
+Designed and developed collaboratively with Claude Code in a continuous session. Human-directed brand vision — the old-money editorial tone, the magazine-format layout, the typographic pairings, the ornamental detailing. Every component authored from scratch through conversation: describe the section, review what's generated, adjust until the typography and spacing feel right. No templates, no UI libraries, no design systems imported. The entire codebase is ~2,000 lines of hand-written JSX and CSS across five files.
