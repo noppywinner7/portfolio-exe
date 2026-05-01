@@ -87,4 +87,18 @@ const Glitch = ({ children, text, every = 6500 }) => {
 
 const Cursor = () => <span className="cursor"></span>;
 
-Object.assign(window, { FX, Boot, Glitch, Cursor });
+const sfxAudio = new Audio("ui-confirm.wav");
+sfxAudio.volume = 0.4;
+
+function playSfx() {
+  sfxAudio.currentTime = 0;
+  sfxAudio.play().catch(() => {});
+}
+
+document.addEventListener("click", (e) => {
+  if (e.target.closest("button, a, .nav-item, .work-card, .thumb, .tab, .filter-bar button, .hamburger, .mobile-back, .icon-btn, .block-h")) {
+    playSfx();
+  }
+});
+
+Object.assign(window, { FX, Boot, Glitch, Cursor, playSfx });
