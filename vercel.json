@@ -1,0 +1,13 @@
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/design_handoff_portfolio/$1" }
+  ],
+  "headers": [
+    {
+      "source": "/design_handoff_portfolio/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
+  ]
+}
