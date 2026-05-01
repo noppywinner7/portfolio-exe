@@ -923,12 +923,10 @@ img, svg { display: block; max-width: 100%; }
   }
 
   /* -- HERO -- */
-  .hero { min-height: auto; height: auto; }
+  .hero { min-height: 280px; height: 280px; }
   .hero-title { font-size: 22px !important; }
   .hero-title-block { max-width: 100%; }
-  .hero-bg { position: relative; aspect-ratio: 16 / 9; }
-  .hero-overlay { position: relative; padding: 12px; }
-  .hero-spec-card { max-width: 100%; margin-top: 12px; }
+  .hero-spec-card { max-width: 100%; }
   .hero-quote { font-size: 11px; }
 
   /* -- THUMBNAILS -- */
