@@ -1,0 +1,42 @@
+# PORTFOLIO.EXE — WIN-07
+
+> Portfolio of WIN-07: AI artist, designer, and founder/operator based in Tokyo. Building AI products, design systems, and creative tools.
+
+## About
+
+WIN-07 is a solo founder/operator who designs and builds AI-powered products, interactive web experiences, and creative production tools. Work spans AI engineering (Claude API, agentic tool_use, prompt architecture), full-stack development (React, Next.js, TypeScript, Python), and design systems (typography, interaction design, motion).
+
+## Values
+
+- CRAFT: Slow, deliberate, finished. No shortcuts that show.
+- QUIET: Restraint over volume. Whitespace is a feature.
+- HONESTY: Tools disclosed, processes documented, work attributed.
+- SERVICE: The user, the audience, the subject — they come first.
+
+## Projects
+
+- [DuangDoctor](https://portfolo-win07-eight.vercel.app/): AI astrology tool computing birth charts across five traditions (Thai, BaZi, Western, Chinese zodiac, numerology) with agentic Claude chat. Next.js + Claude API. 8,621 lines of TypeScript.
+- [LLM Wiki](https://portfolo-win07-eight.vercel.app/): Andrej Karpathy's LLM Wiki pattern applied — a structured knowledge base of 120+ wiki pages built from plain markdown and wikilinks, no vector database. 5x cheaper than RAG after cache warmup.
+- [Content Engine](https://portfolo-win07-eight.vercel.app/): Video production pipeline that turns a creative brief into beat-synced, subtitled short-form video. FFmpeg + Python CLI. No editing software required.
+- [Phuket Private Experience](https://portfolo-win07-eight.vercel.app/): Dark cinematic luxury landing page for an invitation-only lifestyle brand. Vite + React + Framer Motion. Spring physics animations, 94KB gzipped.
+- [JRPG Bazi Loadout](https://portfolo-win07-eight.vercel.app/): Four Pillars of Destiny (BaZi) chart rendered as a JRPG character-loadout screen. WebAudio synthesis, 4 color themes, bilingual CJK. NieR/Persona-inspired.
+- [Maison d'Argent](https://portfolo-win07-eight.vercel.app/): Editorial luxury landing page styled as a magazine broadsheet. 4 mastheads, 4 type pairings, 4 color palettes, 9 hand-drawn SVG engravings.
+- [Portfolio.EXE](https://portfolo-win07-eight.vercel.app/): This portfolio itself — a terminal-aesthetic React app with CRT effects, keyboard navigation, 4 themes, and a tweaks panel. 2,182 lines, zero build step.
+
+## Skills
+
+- AI Engineering: Claude Code (96%), Prompt Architecture (92%), Agentic Tool_Use (88%), Knowledge Systems (85%)
+- Development: React/Next.js (88%), TypeScript/JS (85%), CSS/Design Tokens (90%), Python/CLI (78%), FFmpeg/Audio (75%)
+- Design: Typography (90%), Interaction Design (88%), Design Systems (92%), Animation/Motion (85%), SVG Illustration (78%)
+- Creative Direction: Art Direction (90%), Brand Identity (86%), Taste Enforcement (94%), Cross-Cultural Design (82%)
+- Product & Strategy: Product Thinking (88%), Systems Architecture (86%), Validation/Funnel (80%), Solo Operation (92%)
+
+## Contact
+
+- Email: win07@portfolio.exe
+- Instagram: @win.07
+- LinkedIn: /in/win-07
+
+## Links
+
+- [Full project details](/llms-full.txt)

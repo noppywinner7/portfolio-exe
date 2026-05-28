@@ -1,0 +1,196 @@
+# PORTFOLIO.EXE — WIN-07 (Full Details)
+
+> Complete portfolio documentation for WIN-07: AI artist, designer, and founder/operator based in Tokyo.
+
+---
+
+## Profile
+
+- Handle: WIN-07
+- Role: Founder/Operator
+- Location: Tokyo
+- Status: Active
+- Values: Craft, Quiet, Honesty, Service
+
+---
+
+## Project 01: DUANGDOCTOR
+Category: AI Product / Astrology
+Date: 2026.04
+Tools: Claude Code, Next.js 16, Claude API, TypeScript
+Scale: 8,621 lines, 12 modules
+Duration: 40 hours
+
+### What It Is
+An AI fortune teller that reads your chart across five ancient traditions simultaneously — Thai astrology, Chinese BaZi, Western zodiac, Chinese zodiac, and Pythagorean numerology — then cross-references them against each other to find where multiple systems point in the same direction. You give it a birth date. The calculation layer computes everything — four pillars, thaksa wheels, ten gods, luck cycles, shen sha stars, numerology paths, zodiac profiles — and hands the LLM a complete pre-computed chart with structured tradition docs to reason over. The model doesn't calculate. It interprets, cross-references, and synthesizes.
+
+### Technical Details
+- Next.js 16 (App Router, server components, API routes)
+- Claude API (Anthropic SDK) with adaptive thinking and agentic tool_use
+- TypeScript end-to-end — 8,621 lines
+- 12-module astrology engine: 1,103 lines of deterministic computation
+- 7 Claude tool_use definitions (auto-generated from config JSON)
+- 7,194-word Thai astrology wiki from traditional sources
+- Security: rate limiting (100 calls/hr/IP), daily budget cap ($5/day), prompt injection guards
+
+### Key Achievement
+Computationally grounded multi-tradition astrology. Same chart for the same birthday every time, verifiable against traditional tables. Three traditions independently agreeing is a signal, not a horoscope.
+
+---
+
+## Project 02: LLM WIKI
+Category: Tool / Knowledge Base
+Date: 2026.04
+Tools: Claude Code, Cursor, Obsidian, Git
+Scale: 120+ wiki pages
+Duration: 10 hours (6 sessions)
+
+### What It Is
+An implementation of Andrej Karpathy's LLM Wiki pattern — LLMs building and maintaining structured knowledge bases from plain markdown, navigating by index and wikilinks instead of vector similarity search. Drop a source in, the agent reads it, breaks it into concept and entity pages, links them together, updates the index, and logs what it did.
+
+### Technical Details
+- Three-layer architecture: raw/ (immutable sources), wiki/ (LLM-generated pages), CLAUDE.md (schema)
+- Three core operations: Ingest, Query, Lint
+- Serving via Anthropic prompt caching — ~5x cheaper per turn than traditional RAG
+- 31 raw sources ingested across Thai, Chinese, and English
+- Self-healing lint system that caught a critical doctrinal error
+
+### Key Achievement
+Zero infrastructure knowledge management. Markdown files in a git repo. Accumulating intelligence — each source makes every future query better.
+
+---
+
+## Project 03: CONTENT ENGINE
+Category: Tool / Video Pipeline
+Date: 2026.04
+Tools: Claude Code, FFmpeg, Python, Click + Rich
+Resolution: 1080x1920 (vertical)
+Duration: 10 hours
+
+### What It Is
+A production pipeline that turns a creative brief into a finished, beat-synced short-form video. No editing software. No timeline dragging. Takes raw inputs — images, audio, a script — and assembles them into publish-ready vertical video with animated subtitles, text overlays, transitions, and multi-layer audio mixing. Every cut lands on the beat.
+
+### Technical Details
+- FFmpeg video assembler with transitions, text overlays, 3-layer audio mixing
+- Beat detection via RMS onset analysis (no external libraries)
+- ASS subtitle generator with 7 animation types
+- CLI built on Click and Rich, SQLite database, YAML configuration
+- Operated through natural language via Claude Code
+
+### Key Achievement
+One person can produce short-form content at team speed without learning editing software.
+
+---
+
+## Project 04: PHUKET PRIVATE EXPERIENCE
+Category: Design / Landing Page
+Date: 2026.04
+Tools: Claude Code, Vite, React, Framer Motion, Tailwind
+Scale: 1,250 lines, 10 components
+Duration: 10 hours
+
+### What It Is
+A single-page marketing site for an invitation-only luxury lifestyle brand in Phuket, Thailand. High-ticket experiences ($8K-$150K+) for ultra-high-net-worth individuals. Dark cinematic luxury with spring physics animations.
+
+### Technical Details
+- Vite 5.4 + React 18.3 + Framer Motion 11.15 + Tailwind CSS 3.4
+- Spring physics animations (stiffness 80, damping 20)
+- Magnetic CTA button with cursor tracking
+- Parallax hero with scroll-driven opacity
+- Production build: 94KB gzipped
+- Anti-pattern design system (taste skills/) banning generic AI-generated UI patterns
+
+### Key Achievement
+Agency-quality luxury page built by one person. Dark-to-cream section transition signals psychological shift from desire to action.
+
+---
+
+## Project 05: JRPG BAZI LOADOUT
+Category: Web App / Interaction Design
+Date: 2026.04
+Tools: Claude Code, React 18, Babel Standalone, CSS
+Resolution: 1920x1080 (fixed canvas)
+Duration: 20 hours
+
+### What It Is
+A JRPG-styled web application rendering Four Pillars of Destiny (BaZi) charts as an immersive character-loadout screen. NieR: Automata and Persona 5 inspired. Bilingual Japanese/Chinese/English with real-time toggling.
+
+### Technical Details
+- React 18 with zero build tooling (Babel standalone)
+- WebAudio API synthesized UI sounds (no audio files)
+- 4 color themes (Crimson, Indigo, Gold, Ice)
+- 5-step cinematic onboarding sequence
+- Atomic design system: Panel, Selectable, CornerNotches, StatBar, BiLabel, Tooltip
+- ~2,000 lines of hand-written JSX and CSS, zero dependencies
+
+### Key Achievement
+Astrology as game UI. Every piece of chart data is touchable, hoverable, and responsive with particle effects and synthesized audio.
+
+---
+
+## Project 06: MAISON D'ARGENT
+Category: Design / Editorial Landing
+Date: 2026.04
+Tools: Claude Code, React 18, Babel Standalone, CSS
+Scale: ~2,000 lines, 5 files
+Duration: 10 hours
+
+### What It Is
+A magazine-grade editorial landing page for a fictional luxury lifestyle society. Old money aesthetics, private club exclusivity, and print-editorial typography in the browser.
+
+### Technical Details
+- 4 color palettes (Bone & Ink, Sepia & Antique, Cream & Bordeaux, Ink dark mode)
+- 4 typographic pairings with semantic display/body/label/mono layers
+- 4 masthead treatments with distinct editorial voices
+- 9 hand-drawn SVG service icons as line engravings
+- CSS-only paper grain texture (resolution-independent)
+- Full 15+ field membership form styled as editorial content
+- ~2,000 lines, zero dependencies beyond React + Babel
+
+### Key Achievement
+Density of print in the browser. Nothing looks like a website — everything looks typeset.
+
+---
+
+## Project 07: PORTFOLIO.EXE
+Category: Web App / Design System
+Date: 2026.04
+Tools: Claude Code, React 18, Babel Standalone, CSS
+Scale: 2,182 lines, 11 files
+Duration: 20 hours
+
+### What It Is
+This portfolio itself — a terminal-aesthetic React app that doubles as a project tracker. Navigate it like software with keyboard shortcuts, a boot sequence, and a works database you browse like a file system.
+
+### Technical Details
+- 4 color themes (Cream, Ash, Rust, Mono) with 15+ CSS custom properties each
+- 4 font pairings switchable via data-font attribute
+- 3 density modes (Compact, Normal, Spacious)
+- CRT effects: scanlines, film grain, vignette (all adjustable)
+- Glitch text with chromatic aberration
+- Boot sequence animation
+- WASD keyboard navigation
+- Tweaks panel (Ctrl+Shift+.) for live customization
+- 2,182 lines across 11 files, zero build step
+
+### Key Achievement
+Game design principles applied to portfolio presentation. Every panel, token, and interaction is part of a coherent system.
+
+---
+
+## Skills Summary
+
+AI Engineering: Claude Code (96%), Prompt Architecture (92%), Agentic Tool_Use (88%), Knowledge Systems (85%)
+Development: React/Next.js (88%), TypeScript/JS (85%), CSS/Design Tokens (90%), Python/CLI (78%), FFmpeg/Audio (75%)
+Design: Typography (90%), Interaction Design (88%), Design Systems (92%), Animation/Motion (85%), SVG Illustration (78%)
+Creative Direction: Art Direction (90%), Brand Identity (86%), Taste Enforcement (94%), Cross-Cultural Design (82%)
+Product & Strategy: Product Thinking (88%), Systems Architecture (86%), Validation/Funnel (80%), Solo Operation (92%)
+
+---
+
+## Contact
+
+- Email: win07@portfolio.exe
+- Instagram: @win.07
+- LinkedIn: /in/win-07
+- Website: https://portfolo-win07-eight.vercel.app/

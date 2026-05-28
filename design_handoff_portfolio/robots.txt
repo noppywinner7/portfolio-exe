@@ -1,0 +1,7 @@
+# PORTFOLIO.EXE — WIN-07
+# Allow all crawlers and LLM agents
+
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolo-win07-eight.vercel.app/sitemap.xml
